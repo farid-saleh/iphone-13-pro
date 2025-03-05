@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AI Video Maker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+        #videoResults {
+            margin-top: 20px;
+            text-align: center;
+        }
+        video {
+            width: 80%;
+            max-width: 500px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Video Maker</h1>
+        <form id="aiVideoForm">
+            <div class="form-group">
+                <label for="textInput">Enter Text for Video:</label>
+                <textarea id="textInput" placeholder="Enter the script for the video..." rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="videoUpload">Upload a Video (Optional):</label>
+                <input type="file" id="videoUpload" accept="video/*">
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="createAI()">
+                    Create AI Video
+                </button>
+            </div>
+        </form>
+
+        <div id="videoResults" style="display: none;">
+            <h2>Generated Videos:</h2>
+            <div id="videos"></div>
+        </div>
+    </div>
+
+    <script>
+        function createAI() {
+            const textInput = document.getElementById('textInput').value;
+            const videoUpload = document.getElementById('videoUpload').files[0];
+
+            if (!textInput) {
+                alert('Please enter text for the video script.');
+                return;
+            }
+
+            // Handle AI video creation here
+            alert('Video creation in progress...');
+
+            // Show a loading message while simulating video generation
+            const videoResultsContainer = document.getElementById('videos');
+            videoResultsContainer.innerHTML = 'Generating videos... Please wait.';
+
+            const videoResults = document.getElementById('videoResults');
+            videoResults.style.display = 'block';
+
+            // Simulate generating 5 videos asynchronously
+            for (let i = 0; i < 5; i++) {
+                // Simulate a delay for each video creation using setTimeout
+                setTimeout(function() {
+                    const videoElement = document.createElement('video');
+                    videoElement.controls = true;
+
+                    const sourceElement = document.createElement('source');
+                    // Generate a unique URL for each video (can be a placeholder or real URLs from your backend)
+                    sourceElement.src = `https://www.w3schools.com/html/mov_bbb.mp4?video=${i}`; // Dummy video URL
+                    sourceElement.type = 'video/mp4';
+
+                    videoElement.appendChild(sourceElement);
+
+                    // Append the video to the container
+                    videoResultsContainer.appendChild(videoElement);
+                    videoResultsContainer.appendChild(document.createElement('br')); // Add some spacing between videos
+                }, i * 1000); // Simulate a delay of 1 second between each video
+            }
+        }
+    </script>
+</body>
+</html>
